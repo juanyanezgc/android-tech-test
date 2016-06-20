@@ -41,6 +41,7 @@ public class ProductsRepository {
 
 
 
+
   protected HashMap<String, String> buildQueries(HashMap<String, List<String>> input) {
     HashMap<String, String> output = new HashMap<>();
     for (Map.Entry<String, List<String>> entry : input.entrySet()) {
