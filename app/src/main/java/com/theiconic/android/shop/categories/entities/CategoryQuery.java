@@ -1,7 +1,10 @@
 package com.theiconic.android.shop.categories.entities;
 
+import android.support.v4.util.ArrayMap;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 import lombok.Data;
 
@@ -20,6 +23,27 @@ public class CategoryQuery {
     } catch (URISyntaxException e) {
       return null;
     }
+  }
+
+
+  public Map<String, String> getQueryMap() {
+    Map<String, String> queryMap = new ArrayMap<>();
+    String query = getQuery();
+
+    if (value == null || value.isEmpty() || query == null) {
+      return queryMap;
+    }
+
+    String[] queryParams = query.split("&");
+
+    for (String queryParam : queryParams) {
+      int index = queryParam.indexOf('=');
+      if (index != -1) {
+        queryMap.put(queryParam.substring(0, index), queryParam.substring(index + 1, queryParam.length()));
+      }
+    }
+
+    return queryMap;
   }
 
   @Override
